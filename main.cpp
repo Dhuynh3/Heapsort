@@ -17,9 +17,17 @@ void Heapsort::InsertElement(int val) {
 	this->HArray.push_back(val);
 }
 
+
+/**
+* This function converts the array into a max heap by percolating down on every non-leaf node in reverse order
+* We do not call this on leaf nodes since they statisfy the max heap property, they have no child nodes that contain larger keys.
+* 
+* The largest internal node is at the index floor(n/2) - 1, where n is the total number of nodes.
+
+*/
 void Heapsort::Heapify() {
 	
-	// Largest internal node is at index floor(n/2)-1, where n is the total number of nodes
+	// Start at the largest internal node and MaxHeapPercolateDown all the way to the root index 0;
 	for (int i = (this->HArray.size() / 2) - 1; i >= 0; i--) {
 		this->MaxHeapPercolateDown(i, this->HArray.size());
 	}
@@ -79,10 +87,32 @@ void Heapsort::HeapSort_() {
 
 }
 
+
+
+/**
+* Heapsort implementation
+*/
 int main() {
 
 	Heapsort* heap = new Heapsort();
 
+	// Original array
+	// 77, 55, 92, 67, 98, 24, 42
+	heap->InsertElement(77);
+	heap->InsertElement(55);
+	heap->InsertElement(92);
+	heap->InsertElement(67);
+	heap->InsertElement(98);
+	heap->InsertElement(24);
+	heap->InsertElement(42);
+
+	heap->PrintHeap();
+
+	heap->Heapify();
+
+
+
+	/*
 	// 49,62,88,73,20,94,68
 	heap->InsertElement(49);
 	heap->InsertElement(62);
@@ -98,7 +128,7 @@ int main() {
 	// Do this by calling MaxHeapPercolate on every internal node in the array starting from the largest internal node index
 	// Heapified array 94 73 88 62 20 49 68
 	heap->HeapSort_();
-	
+	*/
 
 
 	heap->PrintHeap();
